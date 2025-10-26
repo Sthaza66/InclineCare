@@ -1,0 +1,32 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# OS files
+.DS_Store
+
+# IDE / editor files
+.vscode/
+.idea/
+
+# Optional: lock files (if you want to regenerate on install)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Optional: coverage reports (if using testing)
+coverage/
