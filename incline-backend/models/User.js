@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   course: { type: String },
   gender: { type: String },
   profilePic: { type: String, default: '' },
+  description:{ type: String, default:"I Am a Professional"} ,
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -37,7 +37,7 @@ router.patch('/profile', verifyToken, async (req, res) => {
     const updates = {};
 
     // Only update provided fields
-    const allowedFields = ['dob', 'course', 'gender', 'profilePic'];
+    const allowedFields = ['dateOfBirth','description', 'course', 'gender', 'profilePic'];
     for (let field of allowedFields) {
       if (req.body[field]) updates[field] = req.body[field];
     }
@@ -54,6 +54,28 @@ router.patch('/profile', verifyToken, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.get('/professionals', async (req, res) => {
+  try {
+    const professionals = await User.find({ role: 'professional' });
+    res.json(professionals);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.get("/all-students", async (req, res) => {
+  try {
+    const students = await User.find({ role: "student" }).select(
+      "_id fullName course profilePic email"
+    );
+    res.json(students);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

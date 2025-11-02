@@ -34,7 +34,17 @@ router.post('/signup', async (req, res) => {
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
     // respond with token + role so frontend can redirect immediately
-    return res.status(201).json({ message: 'Signup successful', token, role: user.role });
+    return res.status(201).json({
+      message: 'Signup successful',
+      token,
+      role: user.role,
+      user: {
+        _id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Server error' });
@@ -43,7 +53,7 @@ router.post('/signup', async (req, res) => {
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
-   try {
+  try {
     const { email, password } = req.body;
     if (!email || !password)
       return res.status(400).json({ message: 'Please provide email and password' });
